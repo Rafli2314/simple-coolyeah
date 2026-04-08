@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://bh7d1w2hg6ut8"]
+
+[ext_resource type="Script" uid="uid://b6agd3o7xvocb" path="res://script/deliveryzone.gd" id="1_gb5s5"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_abuqc"]
+size = Vector2(232, 68)
+
+[node name="deliveryzone" type="Area2D" unique_id=217007616]
+script = ExtResource("1_gb5s5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=297673619]
+shape = SubResource("RectangleShape2D_abuqc")
