@@ -1,5 +1,5 @@
 63f7b34db8d8cdea90c76aacccf841ec
-::res://::1775885407
+::res://::1775886865
 icon.svg::CompressedTexture2D::9144074031423275045::1775885385::1775885385::1::::<><><>0<>0<>2a6d41587657f73d78b1ab7b3012c371<>res://.godot/imported/icon.svg-218a8f2b3041327d8a5756f3a245f83b.ctex::
 ::res://addons/::1775885385
 ::res://addons/pocong-jumpscare/::1775885385
@@ -28,11 +28,11 @@ joystick_tip_arrows.png::CompressedTexture2D::8548255698028078709::1775885385::1
 gBot_complete.png::CompressedTexture2D::6001011946607330718::1775885385::1775885385::1::::<><><>0<>0<>0cc5b3f12031cb64b4c1715135e29e78<>res://.godot/imported/gBot_complete.png-239ca87b20cb50f32daa640d3bb2b6a4.ctex::
 gBot_pieces.webp::CompressedTexture2D::5324989607706283549::1775885385::1775885385::1::::<><><>0<>0<>976f305e38665bb8ae437ab2a339ab95<>res://.godot/imported/gBot_pieces.webp-47c539af805d603ebbcd38c6621add80.ctex::
 template-char1.png::CompressedTexture2D::6329538142522504842::1775885385::1775885385::1::::<><><>0<>0<>196d6717a385d371d7e6826e855a4b7e<>res://.godot/imported/template-char1.png-e4e897d8339087c8f4de8b2fde4b5059.ctex::
-::res://scenes/::1775885385
+::res://scenes/::1775886627
 deliveryzone.tscn::PackedScene::2944032456459797871::1775885385::0::1::::<><><>0<>0<><>::uid://b6agd3o7xvocb::::res://script/deliveryzone.gd
 package.tscn::PackedScene::3053631632679333951::1775885385::0::1::::<><><>0<>0<><>::uid://br78cgr8jxf5d::::res://script/package.gd<>uid://d3jptfhgkmg5r::::res://icon.svg
 player.gd::GDScript::2774644368275034356::1775885385::0::1::::<>CharacterBody2D<><>0<>0<><>::
-player.tscn::PackedScene::4586424783852942016::1775885385::0::1::::<><><>0<>0<><>::uid://bfsb8tnnhx8g3::::res://scenes/player.gd<>uid://cwgctlemseacg::::res://asset/template-char1.png
+player.tscn::PackedScene::4586424783852942016::1775886627::0::1::::<><><>0<>0<><>::uid://bfsb8tnnhx8g3::::res://scenes/player.gd<>uid://cwgctlemseacg::::res://asset/template-char1.png
 test_zone.tscn::PackedScene::7587746132379164553::1775885385::0::1::::<><><>0<>0<><>::uid://bh7d1w2hg6ut8::::res://scenes/deliveryzone.tscn<>uid://bjrg4qcvu0rn0::::res://scenes/package.tscn<>uid://b6lx0mq58rwtk::::res://scenes/player.tscn
 ::res://script/::1775885385
 deliveryzone.gd::GDScript::4562645989576995221::1775885385::0::1::::<>Area2D<><>0<>0<><>::
