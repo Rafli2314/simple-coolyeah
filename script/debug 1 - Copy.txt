@@ -1,3 +1,28 @@
+==========================================================================
+deliveryzone.gd
+
+error :
+Line 8:Identifier "packages" not declared in the current scope.
+Line 9:Identifier "packages" not declared in the current scope.
+Line 10:Function "get_total_weight()" not found in base self.
+Line 10:Identifier "carried_packages" not declared in the current scope.
+
+==========================================================================
+extends Area2D
+
+func _on_body_entered(body):
+	if body.has_method("drop_package"):
+		body.drop_package()
+
+func drop_package() -> Node:  # return pkg-nya
+	if packages.is_empty(): return null
+	var pkg = packages.pop_back()
+	carried_packages = get_total_weight()
+	return pkg
+
+==========================================================================
+package.gd
+==========================================================================
 extends CharacterBody2D
 
 # === CONFIG ===

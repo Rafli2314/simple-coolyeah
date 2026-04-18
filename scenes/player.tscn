@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://cwgctlemseacg" path="res://asset/template-char1.png" id="3_qhqgy"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g2els"]
-size = Vector2(118, 222)
+size = Vector2(78, 222)
 
 [sub_resource type="Animation" id="Animation_dqkch"]
 tracks/0/type = "value"
@@ -198,9 +198,9 @@ _data = {
 [node name="player" type="CharacterBody2D" unique_id=1767040815]
 script = ExtResource("1_3vyb7")
 
-[node name="Area2D" type="Area2D" parent="." unique_id=221239348]
+[node name="DetectionZone" type="Area2D" parent="." unique_id=221239348]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=247178418]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionZone" unique_id=247178418]
 position = Vector2(0, 47)
 shape = SubResource("RectangleShape2D_g2els")
 
