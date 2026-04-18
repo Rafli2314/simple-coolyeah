@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://dgdtcnf2dt0b2"]
+
+[ext_resource type="PackedScene" uid="uid://bh7d1w2hg6ut8" path="res://scenes/deliveryzone.tscn" id="1_6afby"]
+[ext_resource type="PackedScene" uid="uid://bjrg4qcvu0rn0" path="res://scenes/package.tscn" id="2_b64eh"]
+[ext_resource type="PackedScene" uid="uid://b6lx0mq58rwtk" path="res://scenes/player.tscn" id="3_pp1aq"]
+
+[node name="test_zone" type="Node2D" unique_id=1508422214]
+
+[node name="deliveryzone" parent="." unique_id=217007616 instance=ExtResource("1_6afby")]
+position = Vector2(943, 189)
+
+[node name="package" parent="." unique_id=1965244638 instance=ExtResource("2_b64eh")]
+position = Vector2(543, 419)
+
+[node name="player" parent="." unique_id=1767040815 instance=ExtResource("3_pp1aq")]
+position = Vector2(337, 144)
+max_speed = null
+acceleration = null
+friction = null
+max_packages = null

@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://cwgctlemseacg" path="res://asset/template-char1.png" id="3_qhqgy"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g2els"]
-size = Vector2(118, 128)
+size = Vector2(118, 222)
 
 [sub_resource type="Animation" id="Animation_dqkch"]
 tracks/0/type = "value"
@@ -195,38 +195,13 @@ _data = {
 &"walk_right": SubResource("Animation_qhqgy")
 }
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_g2els"]
-animation = &"walk_left"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_qhqgy"]
-animation = &"walk_right"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_dqkch"]
-animation = &"walk_right"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_qlg0r"]
-animation = &"walk_left"
-
-[sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_g2els"]
-blend_point_0/node = SubResource("AnimationNodeAnimation_g2els")
-blend_point_0/pos = Vector2(-1, 0)
-blend_point_1/node = SubResource("AnimationNodeAnimation_qhqgy")
-blend_point_1/pos = Vector2(1, 0)
-blend_point_2/node = SubResource("AnimationNodeAnimation_dqkch")
-blend_point_2/pos = Vector2(0, 1)
-blend_point_3/node = SubResource("AnimationNodeAnimation_qlg0r")
-blend_point_3/pos = Vector2(0, -0.90000004)
-blend_mode = 1
-
-[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_qhqgy"]
-states/Start/position = Vector2(270.66666, 100.44445)
-states/walk/node = SubResource("AnimationNodeBlendSpace2D_g2els")
-states/walk/position = Vector2(580.6666, 100)
-
 [node name="player" type="CharacterBody2D" unique_id=1767040815]
 script = ExtResource("1_3vyb7")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=247178418]
+[node name="Area2D" type="Area2D" parent="." unique_id=221239348]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=247178418]
+position = Vector2(0, 47)
 shape = SubResource("RectangleShape2D_g2els")
 
 [node name="Node" type="Node" parent="." unique_id=958910209]
@@ -354,8 +329,3 @@ rest = Transform2D(1, 0, 0, 1, 0, -50.846878)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1035661700]
 libraries/ = SubResource("AnimationLibrary_dqkch")
-
-[node name="AnimationTree" type="AnimationTree" parent="." unique_id=985860862]
-tree_root = SubResource("AnimationNodeStateMachine_qhqgy")
-anim_player = NodePath("../AnimationPlayer")
-parameters/walk/blend_position = Vector2(0.0047113895, -0.004115224)

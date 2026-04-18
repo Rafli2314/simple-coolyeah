@@ -1,3 +1,38 @@
+==========================================================================
+deliveryzone.gd
+==========================================================================
+extends Area2D
+
+signal package_delivered(pkg)
+
+func _on_body_entered(body):
+	if body.has_method("drop_package") and not body.packages.is_empty():
+		var pkg = body.packages.pop_back()
+		body.carried_packages = body.get_total_weight()
+		emit_signal("package_delivered", pkg)
+		# connect signal ini ke GameManager buat hitung score/kuota
+==========================================================================
+package.gd
+==========================================================================
+extends Area2D
+
+enum PackageType { NORMAL, FRAGILE, HEAVY, SECRET }
+
+@export var type: PackageType = PackageType.NORMAL
+
+# Data per type
+const TYPE_DATA = {
+	PackageType.NORMAL:  { "weight": 1 },
+	PackageType.FRAGILE: { "weight": 1 },  # rusak kalau nabrak
+	PackageType.HEAVY:   { "weight": 2 },  # makan 2 slot
+	PackageType.SECRET:  { "weight": 1 },  # trigger coworker agresif
+}
+
+func get_weight() -> int:
+	return TYPE_DATA[type]["weight"]
+==========================================================================
+player.gd
+==========================================================================
 extends CharacterBody2D
 
 # === CONFIG ===
@@ -68,7 +103,7 @@ func get_total_weight() -> int:
 	var total = 0
 	for pkg in packages:
 		total += pkg.get_weight()
-	print(total)
+	print(get_total_weight())
 	return total
 	
 func can_pickup(pkg) -> bool:
