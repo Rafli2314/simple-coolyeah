@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://b6lx0mq58rwtk"]
 
-[ext_resource type="Script" uid="uid://bfsb8tnnhx8g3" path="res://scenes/player.gd" id="1_3vyb7"]
+[ext_resource type="Script" uid="uid://cjbl2s4as30ng" path="res://scenes/player.gd" id="1_3vyb7"]
 [ext_resource type="Texture2D" uid="uid://cwgctlemseacg" path="res://asset/template-char1.png" id="3_qhqgy"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g2els"]
@@ -329,3 +329,5 @@ rest = Transform2D(1, 0, 0, 1, 0, -50.846878)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1035661700]
 libraries/ = SubResource("AnimationLibrary_dqkch")
+
+[connection signal="area_entered" from="DetectionZone" to="." method="_on_detection_zone_area_entered"]

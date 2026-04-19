@@ -75,21 +75,18 @@ func can_pickup(pkg) -> bool:
 	return get_total_weight() + pkg.get_weight() <= max_packages
 
 func pickup(pkg):
-	if not can_pickup(pkg):
-		print("❌ PICKUP GAGAL — slot penuh atau overweight")
-		return
+	if not can_pickup(pkg): return
 	packages.append(pkg)
 	pkg.get_parent().remove_child(pkg)  # lepas dari world
 	# update carried_packages buat inertia
 	carried_packages = get_total_weight()
-	print("✅ PICKUP — packages sekarang: ", packages.size(), " | total weight: ", carried_packages)
-
 
 func drop_package():
-	if packages.is_empty(): return null
+	if packages.is_empty(): return
 	var pkg = packages.pop_back()
+	get_parent().add_child(pkg)
+	pkg.global_position = global_position + Vector2(0, 40)
 	carried_packages = get_total_weight()
-	return pkg
 
 ## Deteksi paket terdekat
 #func _on_body_entered(body):
