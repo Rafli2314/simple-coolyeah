@@ -26,7 +26,7 @@ func _physics_process(delta: float) -> void:
 		Input.get_axis("ui_up", "ui_down")
 	).normalized()
 	# Input pickup/drop
-	if Input.is_action_just_pressed("ui_accept"):  # ganti key sesuai selera
+	if Input.is_action_just_pressed("ui_accept"):# ganti key sesuai selera
 		if nearby_package and can_pickup(nearby_package):
 			pickup(nearby_package)
 			nearby_package = null
@@ -52,7 +52,6 @@ var last_direction: float = 1.0  # simpan arah terakhir
 
 func _update_animation() -> void:
 	var input_x = Input.get_axis("ui_left", "ui_right")
-
 	if velocity.length() > 10.0:
 		if input_x < 0:
 			if anim.current_animation != "walk_left":
