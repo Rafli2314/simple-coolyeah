@@ -102,7 +102,9 @@ func drop_package():
 		#nearby_package = null
 		
 func _on_detection_zone_area_entered(area):
+	print("DETECT AREA: ", area.name)
 	if area.has_method("get_weight"):
+		print("VALID PACKAGE")
 		nearby_package = area
 		
 func _on_detection_zone_area_exited(area):
