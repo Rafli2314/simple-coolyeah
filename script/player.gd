@@ -5,20 +5,20 @@ extends CharacterBody2D
 @export var acceleration: float = 800.0
 @export var friction: float = 400.0      # base friction (tanpa paket)
 @export var max_packages: int = 3
-var carried_packages: int = 0
 var packages: Array = []  # isi PackageType
+var nearby_packages: Array = []
 @onready var anim = $AnimationPlayer
 # === STATE ===
 var nearby_package: Node = null  # paket yang lagi deket
 
 # Makin banyak paket = friction makin kecil (lebih susah berhenti)
 func get_current_friction() -> float:
-	var weight_factor = 1.0 - (carried_packages * 0.25)  # -25% per paket
+	var weight_factor = 1.0 - (get_total_weight() * 0.25)  # -25% per paket
 	return friction * clamp(weight_factor, 0.25, 1.0)
 
 # Makin banyak paket = speed max berkurang
 func get_current_max_speed() -> float:
-	return max_speed - (carried_packages * 30.0)  # -30 per paket
+	return max_speed - (get_total_weight() * 30.0)  # -30 per paket
 
 func _physics_process(delta: float) -> void:
 	var input_dir = Vector2(
@@ -26,7 +26,7 @@ func _physics_process(delta: float) -> void:
 		Input.get_axis("ui_up", "ui_down")
 	).normalized()
 	# Input pickup/drop
-	if Input.is_action_just_pressed("ui_accept"):  # ganti key sesuai selera
+	if Input.is_action_just_pressed("ui_accept"):# ganti key sesuai selera
 		if nearby_package and can_pickup(nearby_package):
 			pickup(nearby_package)
 			nearby_package = null
@@ -52,7 +52,6 @@ var last_direction: float = 1.0  # simpan arah terakhir
 
 func _update_animation() -> void:
 	var input_x = Input.get_axis("ui_left", "ui_right")
-
 	if velocity.length() > 10.0:
 		if input_x < 0:
 			if anim.current_animation != "walk_left":
@@ -75,33 +74,46 @@ func can_pickup(pkg) -> bool:
 	return get_total_weight() + pkg.get_weight() <= max_packages
 
 func pickup(pkg):
-	if not can_pickup(pkg): return
+	if not can_pickup(pkg):
+		print("❌ PICKUP GAGAL — slot penuh atau overweight")
+		return
 	packages.append(pkg)
 	pkg.get_parent().remove_child(pkg)  # lepas dari world
-	# update carried_packages buat inertia
-	carried_packages = get_total_weight()
+	pkg.reparent($PackageHolder)
+	pkg.position = Vector2(0, -20 - (packages.size() * 10))
+	pkg.z_index = 10
+	# update get_total_weight() buat inertia
+	print("✅ PICKUP — packages sekarang: ", packages.size(), " | total weight: ", get_total_weight())
+
 
 func drop_package():
-	if packages.is_empty(): return
+	if packages.is_empty(): return null
 	var pkg = packages.pop_back()
-	get_parent().add_child(pkg)
-	pkg.global_position = global_position + Vector2(0, 40)
-	carried_packages = get_total_weight()
+	get_total_weight()
+	return pkg
 
-## Deteksi paket terdekat
-#func _on_body_entered(body):
-	#if body is Area2D and body.has_method("get_weight"):
-		#nearby_package = body
-		#print("nearby_package set: ", body.name)
-		#
-#func _on_body_exited(body):
-	#if body == nearby_package:
-		#nearby_package = null
-		
+
 func _on_detection_zone_area_entered(area):
+	print("DETECT AREA: ", area.name)
 	if area.has_method("get_weight"):
-		nearby_package = area
+		print("VALID PACKAGE")
+		nearby_packages.append(area)
 		
 func _on_detection_zone_area_exited(area):
 	if area == nearby_package:
-		nearby_package = null
+		nearby_packages.erase(area)
+
+func get_closest_package():
+	if nearby_packages.is_empty():
+		return null
+		
+	var closest = nearby_packages[0]
+	var closest_dist = position.distance_to(closest.position)
+
+	for p in nearby_packages:
+		var dist = position.distance_to(p.position)
+		if dist < closest_dist:
+			closest = p
+			closest_dist = dist
+
+	return closest

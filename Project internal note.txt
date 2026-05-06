@@ -1,0 +1,4 @@
+feature list : 
+
+System berat package : makin berat, makin susah berhenti, makin lambat
+System Enum package type
