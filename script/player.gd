@@ -10,6 +10,7 @@ var nearby_packages: Array = []
 @onready var anim = $AnimationPlayer
 # === STATE ===
 var nearby_package: Node = null  # paket yang lagi deket
+var is_picking_up = false
 
 # Makin banyak paket = friction makin kecil (lebih susah berhenti)
 func get_current_friction() -> float:
@@ -45,6 +46,7 @@ func _physics_process(delta: float) -> void:
 			Vector2.ZERO,
 			get_current_friction() * delta
 		)
+	if is_picking_up: return
 	_update_animation()
 	move_and_slide()
 	
@@ -77,6 +79,7 @@ func pickup(pkg):
 	if not can_pickup(pkg):
 		print("❌ PICKUP GAGAL — slot penuh atau overweight")
 		return
+	anim.play("pick_package")
 	packages.append(pkg)
 	pkg.get_parent().remove_child(pkg)  # lepas dari world
 	pkg.reparent($PackageHolder)
@@ -85,6 +88,9 @@ func pickup(pkg):
 	# update get_total_weight() buat inertia
 	print("✅ PICKUP — packages sekarang: ", packages.size(), " | total weight: ", get_total_weight())
 
+func _on_animation_player_animation_finished(anim_name):
+	if anim_name == "pick_package":
+		is_picking_up = false
 
 func drop_package():
 	if packages.is_empty(): return null
