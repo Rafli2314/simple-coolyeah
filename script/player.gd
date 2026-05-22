@@ -27,13 +27,14 @@ func _physics_process(delta: float) -> void:
 		Input.get_axis("ui_up", "ui_down")
 	).normalized()
 	# Input pickup/drop
-	if Input.is_action_just_pressed("ui_accept"):# ganti key sesuai selera
+	if Input.is_action_just_pressed("interact"):# ganti key sesuai selera
 		if nearby_package and can_pickup(nearby_package):
 			pickup(nearby_package)
 			nearby_package = null
 		elif not packages.is_empty():
 			drop_package()
-			
+			_update_animation()
+
 	if input_dir != Vector2.ZERO:
 		# Accelerate
 		velocity = velocity.move_toward(
