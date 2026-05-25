@@ -9,7 +9,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bitfr"]
 size = Vector2(84, 78)
 
-[node name="package" type="Area2D" unique_id=1965244638]
+[node name="package" type="Area2D" unique_id=1724470201]
 script = ExtResource("1_y5vkf")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1639647120]

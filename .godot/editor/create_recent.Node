@@ -1,3 +1,5 @@
+Area2D
+RigidBody2D
 Marker2D
 Node2D
 Node
@@ -6,10 +8,7 @@ Label
 Camera2D
 Control
 CollisionPolygon2D
-Area2D
 AnimationTree
 Bone2D
 Skeleton2D
 Polygon2D
-AnimationPlayer
-ShapeCast2D

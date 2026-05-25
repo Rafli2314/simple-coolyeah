@@ -104,7 +104,7 @@ tracks/0/path = NodePath("Skeleton2D/bone_chest/bone_hand_left:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.099999994),
+"times": PackedFloat32Array(0, 0.1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [2.8344147, 0.0]
@@ -116,7 +116,7 @@ tracks/1/path = NodePath("Skeleton2D/bone_chest/bone_hand_right:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(7.450581e-09, 0.10000001),
+"times": PackedFloat32Array(1.4901161e-08, 0.10000002),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [-2.8344147, 0.0]
@@ -398,6 +398,7 @@ bone_angle = 90.0
 
 [node name="bone_hand_left" type="Bone2D" parent="Skeleton2D/bone_chest" unique_id=767178520]
 position = Vector2(-51, 2)
+scale = Vector2(0.9999999, 0.9999999)
 rest = Transform2D(1, 0, 0, 1, -51, 2)
 auto_calculate_length_and_angle = false
 length = 50.0

@@ -40,7 +40,7 @@ func _physics_process(delta: float) -> void:
 			is_picking_up = true
 			is_dropping = true
 			pending_package = null
-			anim.play("pick_package")
+			anim.play("drop_package")
 
 	if input_dir != Vector2.ZERO:
 		# Accelerate
@@ -56,10 +56,12 @@ func _physics_process(delta: float) -> void:
 		)
 	if is_picking_up: return
 	_update_animation()
+		
 	move_and_slide()
 	
 var last_direction: float = 1.0  # simpan arah terakhir
-
+	
+	
 func _update_animation() -> void:
 	var input_x = Input.get_axis("ui_left", "ui_right")
 	if velocity.length() > 10.0:
@@ -72,6 +74,8 @@ func _update_animation() -> void:
 	else:
 		if anim.current_animation != "idle":
 			anim.play("idle")
+	if input_x != 0:
+		last_direction = sign(input_x)
 	
 func get_total_weight() -> int:
 	var total = 0
@@ -100,17 +104,19 @@ func pickup(pkg):
 	print("PICKUP SUCCESS")
 
 func _on_animation_player_animation_finished(anim_name):
+
 	if anim_name == "pick_package":
+		if pending_package:
+			pickup(pending_package)
+			pending_package = null
+
+	elif anim_name == "drop_package":
 		if is_dropping:
 			drop_package()
 			is_dropping = false
 
-		elif pending_package:
-			pickup(pending_package)
-			pending_package = null
-
-		is_picking_up = false
-		anim.play("idle")
+	is_picking_up = false
+	anim.play("idle")
 
 func drop_package():
 	if packages.is_empty():
@@ -120,7 +126,26 @@ func drop_package():
 
 	pkg.reparent(get_tree().current_scene)
 
-	pkg.global_position = global_position + Vector2(0, 32)
+	var throw_direction = Vector2(last_direction, 0)
+
+	# posisi awal lempar
+	pkg.global_position = global_position + (throw_direction * 0)
+
+	# target lempar
+	var target_position = pkg.global_position + (throw_direction * 300)
+
+	# tween lempar
+	var tween = create_tween()
+
+	tween.tween_property(
+		pkg,
+		"global_position",
+		target_position,
+		0.25
+	)
+
+	pkg.rotation_degrees += 45 * last_direction
+
 	pkg.z_index = 0
 
 	print("DROP SUCCESS")
