@@ -11,6 +11,8 @@ var nearby_packages: Array = []
 # === STATE ===
 var nearby_package: Node = null  # paket yang lagi deket
 var is_picking_up = false
+var pending_package = null
+var is_dropping = false
 
 # Makin banyak paket = friction makin kecil (lebih susah berhenti)
 func get_current_friction() -> float:
@@ -22,18 +24,23 @@ func get_current_max_speed() -> float:
 	return max_speed - (get_total_weight() * 30.0)  # -30 per paket
 
 func _physics_process(delta: float) -> void:
+	nearby_package = get_closest_package()
 	var input_dir = Vector2(
 		Input.get_axis("ui_left", "ui_right"),
 		Input.get_axis("ui_up", "ui_down")
 	).normalized()
 	# Input pickup/drop
-	if Input.is_action_just_pressed("interact"):# ganti key sesuai selera
+	if Input.is_action_just_pressed("pick-package") and not is_picking_up:# ganti key sesuai selera
+		print(pickup)
 		if nearby_package and can_pickup(nearby_package):
-			pickup(nearby_package)
-			nearby_package = null
+			is_picking_up = true
+			pending_package = nearby_package
+			anim.play("pick_package")
 		elif not packages.is_empty():
-			drop_package()
-			_update_animation()
+			is_picking_up = true
+			is_dropping = true
+			pending_package = null
+			anim.play("pick_package")
 
 	if input_dir != Vector2.ZERO:
 		# Accelerate
@@ -77,28 +84,48 @@ func can_pickup(pkg) -> bool:
 	return get_total_weight() + pkg.get_weight() <= max_packages
 
 func pickup(pkg):
-	if not can_pickup(pkg):
-		print("❌ PICKUP GAGAL — slot penuh atau overweight")
+	if pkg == null:
 		return
-	anim.play("pick_package")
+
+	if pkg.get_parent() == null:
+		return
+
 	packages.append(pkg)
-	pkg.get_parent().remove_child(pkg)  # lepas dari world
+
 	pkg.reparent($PackageHolder)
+
 	pkg.position = Vector2(0, -20 - (packages.size() * 10))
 	pkg.z_index = 10
-	# update get_total_weight() buat inertia
-	print("✅ PICKUP — packages sekarang: ", packages.size(), " | total weight: ", get_total_weight())
+
+	print("PICKUP SUCCESS")
 
 func _on_animation_player_animation_finished(anim_name):
 	if anim_name == "pick_package":
+		if is_dropping:
+			drop_package()
+			is_dropping = false
+
+		elif pending_package:
+			pickup(pending_package)
+			pending_package = null
+
 		is_picking_up = false
+		anim.play("idle")
 
 func drop_package():
-	if packages.is_empty(): return null
-	var pkg = packages.pop_back()
-	get_total_weight()
-	return pkg
+	if packages.is_empty():
+		return null
 
+	var pkg = packages.pop_back()
+
+	pkg.reparent(get_tree().current_scene)
+
+	pkg.global_position = global_position + Vector2(0, 32)
+	pkg.z_index = 0
+
+	print("DROP SUCCESS")
+
+	return pkg
 
 func _on_detection_zone_area_entered(area):
 	print("DETECT AREA: ", area.name)
