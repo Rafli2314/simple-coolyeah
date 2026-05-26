@@ -93,6 +93,30 @@ tracks/6/keys = {
 "update": 0,
 "values": [0.0]
 }
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Skeleton2D/bone_chest/bone_hip/bone_leg_left:scale")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 0.67)]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Skeleton2D/bone_chest/bone_hip/bone_leg_right:scale")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.99999976, 0.99999976)]
+}
 
 [sub_resource type="Animation" id="Animation_fjrip"]
 resource_name = "drop_package"
@@ -269,6 +293,82 @@ tracks/3/keys = {
 "values": [Vector2(1, 1), Vector2(1, 1)]
 }
 
+[sub_resource type="Animation" id="Animation_smehm"]
+resource_name = "walk_up_down"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = false
+tracks/0/path = NodePath("Skeleton2D/bone_chest/bone_hip/bone_leg_left:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.13333334, 0.26666665, 0.36666667, 0.5),
+"transitions": PackedFloat32Array(0.45062527, 0.3077863, 0.31864014, 0.3077863, 0.45062527),
+"update": 0,
+"values": [0.0, 0.5235988, 0.0, -0.5235988, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = false
+tracks/1/path = NodePath("Skeleton2D/bone_chest/bone_hip/bone_leg_right:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.13333334, 0.26666665, 0.36666667, 0.5),
+"transitions": PackedFloat32Array(0.45062527, 0.3077863, 0.31864014, 0.3077863, 0.45062527),
+"update": 0,
+"values": [1.5707964, 1.0471976, 1.5707964, 2.0943952, 1.5707964]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Skeleton2D:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("polygons:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Skeleton2D/bone_chest/bone_hip/bone_leg_left:scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.13333334, 0.26666668, 0.36666667, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1, 1), Vector2(1, 0.67), Vector2(1, 1), Vector2(1, 1)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Skeleton2D/bone_chest/bone_hip/bone_leg_right:scale")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.13333334, 0.26666668, 0.36666667, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0.99999976, 0.99999976), Vector2(0.6, 1), Vector2(0.99999976, 0.99999976), Vector2(0.6, 1), Vector2(0.99999976, 0.99999976)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_dqkch"]
 _data = {
 &"RESET": SubResource("Animation_dqkch"),
@@ -276,7 +376,8 @@ _data = {
 &"idle": SubResource("Animation_qlg0r"),
 &"pick_package": SubResource("Animation_tuyoq"),
 &"walk_left": SubResource("Animation_g2els"),
-&"walk_right": SubResource("Animation_qhqgy")
+&"walk_right": SubResource("Animation_qhqgy"),
+&"walk_up_down": SubResource("Animation_smehm")
 }
 
 [node name="player" type="CharacterBody2D" unique_id=1767040815]
@@ -374,7 +475,7 @@ bone_angle = 90.0
 
 [node name="bone_leg_left" type="Bone2D" parent="Skeleton2D/bone_chest/bone_hip" unique_id=1735249207]
 position = Vector2(-27, 0)
-scale = Vector2(0.99999976, 0.99999976)
+scale = Vector2(1, 0.67)
 rest = Transform2D(1, 0, 0, 1, -27, 0)
 auto_calculate_length_and_angle = false
 length = 50.0

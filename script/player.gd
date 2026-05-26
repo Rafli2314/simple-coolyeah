@@ -64,6 +64,7 @@ var last_direction: float = 1.0  # simpan arah terakhir
 	
 func _update_animation() -> void:
 	var input_x = Input.get_axis("ui_left", "ui_right")
+	var input_y = Input.get_axis("ui_up", "ui_down")
 	if velocity.length() > 10.0:
 		if input_x < 0:
 			if anim.current_animation != "walk_left":
@@ -74,9 +75,16 @@ func _update_animation() -> void:
 	else:
 		if anim.current_animation != "idle":
 			anim.play("idle")
+			
 	if input_x != 0:
 		last_direction = sign(input_x)
-	
+		
+	if input_y < 0:
+		if anim.current_animation != "walk_up_down":
+			anim.play("walk_up_down")
+	elif input_y > 0:
+		if anim.current_animation != "walk_up_down":
+				anim.play("walk_up_down")
 func get_total_weight() -> int:
 	var total = 0
 	for pkg in packages:
