@@ -143,9 +143,6 @@ func drop_package():
 		target_position,
 		0.25
 	)
-
-	pkg.rotation_degrees += 45 * last_direction
-
 	pkg.z_index = 0
 
 	print("DROP SUCCESS")

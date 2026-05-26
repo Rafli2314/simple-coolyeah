@@ -9,7 +9,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bitfr"]
 size = Vector2(84, 78)
 
-[node name="package" type="Area2D" unique_id=1724470201]
+[node name="packagenormal" type="Area2D" unique_id=1724470201]
 script = ExtResource("1_y5vkf")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1639647120]
@@ -21,18 +21,21 @@ scale = Vector2(5, 5)
 texture = ExtResource("2_bfkic")
 
 [node name="BoxHeavy" type="Sprite2D" parent="." unique_id=1020017835]
+visible = false
 texture_filter = 1
 position = Vector2(267.99997, 0.5000019)
 scale = Vector2(5, 5)
 texture = ExtResource("3_pdb4y")
 
 [node name="BoxNormal" type="Sprite2D" parent="." unique_id=2006426806]
+visible = false
 texture_filter = 1
 position = Vector2(88.99997, 0.5000019)
 scale = Vector2(5, 5)
 texture = ExtResource("4_rfqn4")
 
 [node name="BoxSpecial" type="Sprite2D" parent="." unique_id=1856579656]
+visible = false
 texture_filter = 1
 position = Vector2(180.99997, 0.5000019)
 scale = Vector2(5, 5)
